@@ -105,14 +105,14 @@ pipeline {
     
 
 stage('Docker Build and Push') {
-  steps {
-    withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
-      sh 'printenv'
-      sh "sudo docker build -t raffydevops/numeric-app:${GIT_COMMIT} ."
-      sh "sudo docker push raffydevops/numeric-app:${GIT_COMMIT}"
+    steps {
+        withDockerRegistry([credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/']) {
+            sh "sudo docker build -t raffydevops/numeric-app:${GIT_COMMIT} ."
+            sh "sudo docker push raffydevops/numeric-app:${GIT_COMMIT}"
+        }
     }
-  }
 }
+
 
 
  //    stage('Vulnerability Scan - Kubernetes') {
